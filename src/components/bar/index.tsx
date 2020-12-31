@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {Link} from 'react-router-dom';
+import {UserRegistrationPage} from "../../views/user-registration";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function BarComponent() {
+export default function Index() {
     const classes = useStyles();
 
     return (
@@ -32,9 +34,11 @@ export default function BarComponent() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Client Sales
+                        <Link to='/'>Client Sales</Link>
                     </Typography>
-                    <Button color="inherit">Register</Button>
+                    <Link to={UserRegistrationPage}>
+                        <Button color="inherit">Register</Button>
+                    </Link>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>

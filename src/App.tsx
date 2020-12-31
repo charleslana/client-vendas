@@ -1,13 +1,10 @@
 import React from 'react';
-import BarComponent from "./components/bar/BarComponent";
-import CarouselComponent from "./components/carousel/CarouselComponent";
+import Routes from "./routes";
 
-
-function App() {
+const App = () => {
     return (
         <>
-            <BarComponent/>
-            <CarouselComponent/>
+            <Routes/>
         </>
     );
 }

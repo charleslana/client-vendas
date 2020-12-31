@@ -2,9 +2,9 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Background_1 from '../../images/1.png';
-import Background_2 from '../../images/2.png';
-import Background_3 from '../../images/3.png';
+import Background_1 from '../../assets/images/1.png';
+import Background_2 from '../../assets/images/2.png';
+import Background_3 from '../../assets/images/3.png';
 
 const useStyles = makeStyles(theme => ({
     divCarouselRoot: {
@@ -43,7 +43,7 @@ interface InterfaceCarouselProps {
     }
 }
 
-const CarouselComponent = () => {
+const Index = () => {
     let items = [
         {
             name: "Node #1",
@@ -90,4 +90,4 @@ const Item = (props: InterfaceCarouselProps) => {
     )
 }
 
-export default CarouselComponent;
+export default Index;
