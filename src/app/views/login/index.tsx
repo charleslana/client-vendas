@@ -1,16 +1,16 @@
 import React from "react";
 import Bar from '../../components/bar'
-import Carousel from '../../components/carousel';
+import SignIn from "../../components/form/login";
 import Footer from "../../components/footer";
 
-const Home: React.FC = () => {
+const Login: React.FC = () => {
     return (
         <>
             <Bar/>
-            <Carousel/>
+            <SignIn/>
             <Footer/>
         </>
     );
 }
 
-export default Home;
+export default Login;

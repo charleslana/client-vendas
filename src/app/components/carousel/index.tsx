@@ -7,29 +7,32 @@ import Background_2 from '../../../assets/images/2.png';
 import Background_3 from '../../../assets/images/3.png';
 
 const useStyles = makeStyles(theme => ({
-    divCarouselRoot: {
+    paper: {
         height: 400,
         color: '#ffffff',
         borderRadius: 0,
         backgroundColor: '#1c277a'
     },
-    divImageCarousel: {
+    box: {
         width: '50%',
-        height: '100%',
+        height: 350,
         float: 'left',
         display: 'flex'
     },
-    divInfoCarousel: {
-        width: '50%',
-        height: '100%',
-        float: 'right'
-    },
-    imageCarousel: {
+    image: {
         width: '50%',
         height: '50%',
         objectFit: 'contain',
         display: 'block',
         margin: 'auto'
+    },
+    description: {
+        width: '50%',
+        height: '100%',
+        float: 'right'
+    },
+    indicators: {
+        float: 'left'
     }
 
 }));
@@ -43,8 +46,27 @@ interface InterfaceCarouselProps {
     }
 }
 
+const Item = (props: InterfaceCarouselProps) => {
+    const {box, image, description} = useStyles();
+
+    return (
+        <>
+            <Typography className={box} component={"div"}>
+                <img src={props.item.image} alt="Product" className={image} />
+            </Typography>
+            <Typography className={description} component={"div"}>
+                <h2>{props.item.name}</h2>
+                <p>{props.item.description}</p>
+                <Button variant="contained" color="primary">
+                    Request order!
+                </Button>
+            </Typography>
+        </>
+    );
+}
+
 const Index = () => {
-    let items = [
+    const items = [
         {
             name: "Node #1",
             description: "The whole structure of my server created by him",
@@ -62,32 +84,20 @@ const Index = () => {
         }
     ];
 
+    const {paper, indicators} = useStyles();
+
     return (
-        <Carousel animation={"slide"}>
+        <Carousel
+            className={paper}
+            animation={"slide"}
+            autoPlay={false}
+            indicatorContainerProps={{className: indicators, style: {}}}
+        >
             {
                 items.map( (item, i) => <Item key={i} item={item}/> )
             }
         </Carousel>
-    )
-}
-
-const Item = (props: InterfaceCarouselProps) => {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.divCarouselRoot}>
-            <div className={classes.divImageCarousel}>
-                <img src={props.item.image} alt="Product" className={classes.imageCarousel} />
-            </div>
-            <Typography className={classes.divInfoCarousel} component={"div"}>
-                <h2>{props.item.name}</h2>
-                <p>{props.item.description}</p>
-                <Button variant="contained" color="primary">
-                    Request order!
-                </Button>
-            </Typography>
-        </div>
-    )
+    );
 }
 
 export default Index;
