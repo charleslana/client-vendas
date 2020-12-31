@@ -90,7 +90,6 @@ const Index = () => {
         <Carousel
             className={paper}
             animation={"slide"}
-            autoPlay={false}
             indicatorContainerProps={{className: indicators, style: {}}}
         >
             {
