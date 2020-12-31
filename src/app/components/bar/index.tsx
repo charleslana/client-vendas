@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from 'react-router-dom';
-import {UserRegistrationPage} from "../../views/user-registration";
+import PageLinks from "../../../environments/PageLinks";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,7 +36,7 @@ export default function Index() {
                     <Typography variant="h6" className={classes.title}>
                         <Link to='/'>Client Sales</Link>
                     </Typography>
-                    <Link to={UserRegistrationPage}>
+                    <Link to={PageLinks.UserRegistrationPage}>
                         <Button color="inherit">Register</Button>
                     </Link>
                     <Button color="inherit">Login</Button>

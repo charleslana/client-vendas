@@ -1,13 +1,14 @@
 import React from "react";
 import {Route, BrowserRouter} from 'react-router-dom';
-import Home from './views/home';
-import UserRegistration, {UserRegistrationPage} from "./views/user-registration";
+import Home from './app/views/home';
+import UserRegistration from "./app/views/user-registration";
+import PageLinks from "./environments/PageLinks";
 
 const Routes = () => {
     return(
         <BrowserRouter>
-            <Route component={Home} path='/' exact />
-            <Route component={UserRegistration} path={UserRegistrationPage}/>
+            <Route component={Home} path={PageLinks.HomePage} exact />
+            <Route component={UserRegistration} path={PageLinks.UserRegistrationPage} exact/>
         </BrowserRouter>
     );
 }
