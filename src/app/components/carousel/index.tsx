@@ -77,27 +77,6 @@ const Index = () => {
         });
     }, []);
 
-    const items = [
-        {
-            name: "Product 1",
-            price: 100.00,
-            quantity: 10,
-            image: imageProuct
-        },
-        {
-            name: "Product 2",
-            price: 200.00,
-            quantity: 20,
-            image: imageProuct
-        },
-        {
-            name: "Product 3",
-            price: 300.00,
-            quantity: 30,
-            image: imageProuct
-        }
-    ];
-
     const {paper, indicators} = useStyles();
 
     return (
