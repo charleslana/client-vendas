@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Carousel from 'react-material-ui-carousel';
 import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import imageProuct from '../../../assets/images/product.png'
+import imageProduct from '../../../assets/images/product.png'
 import api from "../../../service/api";
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +47,7 @@ interface InterfaceCarouselProps {
 }
 
 const Item = (props: InterfaceCarouselProps | any) => {
-    props.item.image = imageProuct;
+    props.item.image = imageProduct;
 
     const {box, image, info} = useStyles();
 
