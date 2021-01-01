@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-material-ui-carousel';
 import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Background_1 from '../../../assets/images/1.png';
-import Background_2 from '../../../assets/images/2.png';
-import Background_3 from '../../../assets/images/3.png';
+import imageProuct from '../../../assets/images/product.png'
+import api from "../../../service/api";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles(theme => ({
         display: 'block',
         margin: 'auto'
     },
-    description: {
+    info: {
         width: '50%',
         height: '100%',
         float: 'right'
@@ -41,22 +40,26 @@ interface InterfaceCarouselProps {
     key: number;
     item: {
         name: string;
-        description: string;
+        quantity: number;
+        price: number;
         image: string;
     }
 }
 
-const Item = (props: InterfaceCarouselProps) => {
-    const {box, image, description} = useStyles();
+const Item = (props: InterfaceCarouselProps | any) => {
+    props.item.image = imageProuct;
+
+    const {box, image, info} = useStyles();
 
     return (
         <>
             <Typography className={box} component={"div"}>
                 <img src={props.item.image} alt="Product" className={image} />
             </Typography>
-            <Typography className={description} component={"div"}>
+            <Typography className={info} component={"div"}>
                 <h2>{props.item.name}</h2>
-                <p>{props.item.description}</p>
+                <h3>Price: {props.item.price}</h3>
+                <p>Quantity: {props.item.quantity}</p>
                 <Button variant="contained" color="primary">
                     Request order!
                 </Button>
@@ -66,21 +69,32 @@ const Item = (props: InterfaceCarouselProps) => {
 }
 
 const Index = () => {
+    const [products, setProducts] = useState<InterfaceCarouselProps[]>([]);
+
+    useEffect(() => {
+        api.get('products').then(response => {
+            setProducts(response.data);
+        });
+    }, []);
+
     const items = [
         {
-            name: "Node #1",
-            description: "The whole structure of my server created by him",
-            image: Background_1
+            name: "Product 1",
+            price: 100.00,
+            quantity: 10,
+            image: imageProuct
         },
         {
-            name: "TypeScript #2",
-            description: "The code that was used on my back end server",
-            image: Background_2
+            name: "Product 2",
+            price: 200.00,
+            quantity: 20,
+            image: imageProuct
         },
         {
-            name: "React #3",
-            description: "Sales application front end",
-            image: Background_3
+            name: "Product 3",
+            price: 300.00,
+            quantity: 30,
+            image: imageProuct
         }
     ];
 
@@ -93,7 +107,7 @@ const Index = () => {
             indicatorContainerProps={{className: indicators, style: {}}}
         >
             {
-                items.map( (item, i) => <Item key={i} item={item}/> )
+                products.map( (item, i) => <Item key={i} item={item}/> )
             }
         </Carousel>
     );
