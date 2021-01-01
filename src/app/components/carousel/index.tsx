@@ -4,6 +4,7 @@ import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import imageProduct from '../../../assets/images/product.png'
 import api from "../../../service/api";
+import Skeleton from "react-loading-skeleton";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -36,6 +37,26 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+const LoadingSkeleton = () => {
+    const {paper, box, image, info} = useStyles();
+
+    return(
+        <div className={paper} style={{backgroundColor: '#ffffff'}}>
+            <Typography className={box} component={"div"}>
+                <div className={image}>
+                    <Skeleton width={'100%'} height={'50%'}/>
+                </div>
+            </Typography>
+            <Typography className={info} component={"div"}>
+                <h2><Skeleton width={'50%'}/></h2>
+                <h3><Skeleton width={'50%'}/></h3>
+                <p><Skeleton width={'50%'}/></p>
+                <Skeleton width={100} height={50}/>
+            </Typography>
+        </div>
+    );
+}
+
 interface InterfaceCarouselProps {
     key: number;
     item: {
@@ -47,9 +68,9 @@ interface InterfaceCarouselProps {
 }
 
 const Item = (props: InterfaceCarouselProps | any) => {
-    props.item.image = imageProduct;
-
     const {box, image, info} = useStyles();
+
+    props.item.image = imageProduct;
 
     return (
         <>
@@ -70,25 +91,32 @@ const Item = (props: InterfaceCarouselProps | any) => {
 
 const Index = () => {
     const [products, setProducts] = useState<InterfaceCarouselProps[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         api.get('products').then(response => {
             setProducts(response.data);
+            setLoading(false);
         });
     }, []);
 
     const {paper, indicators} = useStyles();
 
     return (
-        <Carousel
-            className={paper}
-            animation={"slide"}
-            indicatorContainerProps={{className: indicators, style: {}}}
-        >
-            {
-                products.map( (item, i) => <Item key={i} item={item}/> )
+        <>
+            {loading && <LoadingSkeleton/>}
+            {!loading &&
+            <Carousel
+                className={paper}
+                animation={"slide"}
+                indicatorContainerProps={{className: indicators, style: {}}}
+            >
+                {
+                    products.map((item, i) => <Item key={i} item={item}/>)
+                }
+            </Carousel>
             }
-        </Carousel>
+        </>
     );
 }
 
