@@ -2,7 +2,7 @@ import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, {AlertProps} from '@material-ui/lab/Alert';
 
-interface ErrorProps {
+interface InterfaceProps {
    message: string;
    type: any;
    open: boolean;
@@ -12,7 +12,7 @@ const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Notification(props: ErrorProps) {
+export default function Notification(props: InterfaceProps) {
     const [state, setState] = React.useState({
         open: props.open
     });
