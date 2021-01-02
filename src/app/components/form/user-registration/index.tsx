@@ -78,15 +78,6 @@ export default function SignUp() {
         }
 
         await api.post('users', data).then(() => {
-            setFormData({
-                ...formData,
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            });
-            setLoading(false);
             return setNotification({
                 open: true,
                 type: 'success',
