@@ -62,7 +62,7 @@ export default function SignUp() {
 
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = useCallback(async (event: FormEvent) => {
+    const handleSubmit = useCallback(async (event) => {
         event.preventDefault();
 
         setLoading(true);
@@ -78,6 +78,8 @@ export default function SignUp() {
         }
 
         await api.post('users', data).then(() => {
+            event.target.reset();
+            setLoading(false);
             return setNotification({
                 open: true,
                 type: 'success',
