@@ -101,7 +101,11 @@ const Index = () => {
 
     const [loading, setLoading] = useState(true);
 
-    const [notification, setNotification] = useState<InterfaceNotification>();
+    const [notification, setNotification] = useState<InterfaceNotification>({
+        open: false,
+        type: 'error',
+        message: 'Error'
+    });
 
     useEffect(() => {
         api.get('products').then(response => {
@@ -110,7 +114,7 @@ const Index = () => {
             setLoading(false);
 
         }).catch((error) => {
-            setNotification({open: true, type: 'error', message: 'An error has occurred.'});
+            return setNotification({open: true, type: 'error', message: 'An error has occurred.'});
         });
     }, []);
 
@@ -130,8 +134,8 @@ const Index = () => {
                 }
             </Carousel>
             }
-            {notification?.open &&
-            <Notification message={notification?.message} type={notification?.type} open={true}/>
+            {notification.open &&
+            <Notification message={notification.message} type={notification.type} open={true}/>
             }
         </>
     );
